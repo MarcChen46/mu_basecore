@@ -1644,6 +1644,11 @@ InitVariableCache (
           gBS->FreePages (TempCacheInfoBuffer, Pages);
           TempCacheInfoBuffer             = 0;
           AllRtBufferAllocationsSucceeded = FALSE;
+        } else {
+          //
+          // If MmUnblockMemoryRequest returns EFI_UNSUPPORTED, assume memory is already accessible at runtime
+          //
+          Status = EFI_SUCCESS;
         }
       }
     }
@@ -1666,6 +1671,11 @@ InitVariableCache (
           gBS->FreePages (TempHobCacheBuffer, Pages);
           TempHobCacheBuffer              = 0;
           AllRtBufferAllocationsSucceeded = FALSE;
+        } else {
+          //
+          // If MmUnblockMemoryRequest returns EFI_UNSUPPORTED, assume memory is already accessible at runtime
+          //
+          Status = EFI_SUCCESS;
         }
       }
     }
@@ -1688,6 +1698,11 @@ InitVariableCache (
           gBS->FreePages (TempNvCacheBuffer, Pages);
           TempNvCacheBuffer               = 0;
           AllRtBufferAllocationsSucceeded = FALSE;
+        } else {
+          //
+          // If MmUnblockMemoryRequest  returns EFI_UNSUPPORTED, assume memory is already accessible at runtime
+          //
+          Status = EFI_SUCCESS;
         }
       }
     }
@@ -1710,6 +1725,11 @@ InitVariableCache (
           gBS->FreePages (TempVolatileCacheBuffer, Pages);
           TempVolatileCacheBuffer         = 0;
           AllRtBufferAllocationsSucceeded = FALSE;
+        } else {
+          //
+          // If MmUnblockMemoryRequest returns EFI_UNSUPPORTED, assume memory is already accessible at runtime
+          //
+          Status = EFI_SUCCESS;
         }
       }
     }
