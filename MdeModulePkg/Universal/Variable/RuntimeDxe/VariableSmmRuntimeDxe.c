@@ -1192,7 +1192,7 @@ RuntimeServiceSetVariable (
                Data,
                &HookInvoked
                );
-    if (EFI_ERROR (Status)) {
+    if (Status != EFI_SUCCESS) {
       return Status;
     }
   }

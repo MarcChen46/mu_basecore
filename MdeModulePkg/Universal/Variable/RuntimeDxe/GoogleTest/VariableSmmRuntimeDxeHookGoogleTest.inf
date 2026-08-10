@@ -1,0 +1,44 @@
+## @file
+# Host application that tests the VariableSmmRuntimeDxe hook consumer.
+#
+# Copyright (c) Microsoft Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION     = 0x00010017
+  BASE_NAME       = VariableSmmRuntimeDxeHookGoogleTest
+  FILE_GUID       = FBDC0E20-7BC4-4A78-B807-50756B58C51F
+  MODULE_TYPE     = HOST_APPLICATION
+  VERSION_STRING  = 1.0
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  VariableSmmRuntimeDxeHookGoogleTest.cpp
+  ../VariableSmmRuntimeDxeHook.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UnitTestFrameworkPkg/UnitTestFrameworkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  GoogleTestLib
+  UefiBootServicesTableLib
+  UefiRuntimeLib
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+
+[Protocols]
+  gEdkiiVariableSmmRuntimeDxeHookProtocolGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /EHsc

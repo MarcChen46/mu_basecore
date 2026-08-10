@@ -20,7 +20,6 @@ STATIC EFI_EVENT                         mVariableRuntimeHookNotifyEvent;
 STATIC EFI_EVENT                         mVariableRuntimeHookEndOfDxeEvent;
 STATIC VOID                              *mVariableRuntimeHookRegistration;
 STATIC BOOLEAN                           mVariableRuntimeHookDiscoveryEnded;
-STATIC BOOLEAN                           mVariableRuntimeHookActive;
 
 /**
   Caches the first valid variable runtime hook provider.
@@ -264,24 +263,18 @@ VariableRuntimeHookPreSetVariable (
   EFI_STATUS  Status;
 
   *HookInvoked = FALSE;
-  if (!EfiAtRuntime () || (mPreSetVariable == NULL) || mVariableRuntimeHookActive) {
+  if (!EfiAtRuntime () || (mPreSetVariable == NULL)) {
     return EFI_SUCCESS;
   }
 
-  //
-  // Suppress hook recursion if a provider violates the protocol contract and
-  // calls SetVariable() from either callback.
-  //
-  mVariableRuntimeHookActive = TRUE;
-  Status                     = mPreSetVariable (
-                                 VariableName,
-                                 VendorGuid,
-                                 Attributes,
-                                 DataSize,
-                                 Data
-                                 );
-  if (EFI_ERROR (Status)) {
-    mVariableRuntimeHookActive = FALSE;
+  Status = mPreSetVariable (
+             VariableName,
+             VendorGuid,
+             Attributes,
+             DataSize,
+             Data
+             );
+  if (Status != EFI_SUCCESS) {
     return Status;
   }
 
@@ -306,5 +299,4 @@ VariableRuntimeHookPostSetVariable (
   }
 
   mPostSetVariable (SetVariableStatus);
-  mVariableRuntimeHookActive = FALSE;
 }

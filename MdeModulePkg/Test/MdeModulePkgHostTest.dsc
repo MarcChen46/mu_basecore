@@ -120,6 +120,12 @@
       UefiBootServicesTableLib|MdePkg/Test/Mock/Library/GoogleTest/MockUefiBootServicesTableLib/MockUefiBootServicesTableLib.inf
   }
 
+  MdeModulePkg/Universal/Variable/RuntimeDxe/GoogleTest/VariableSmmRuntimeDxeHookGoogleTest.inf {
+    <LibraryClasses>
+      UefiBootServicesTableLib|MdePkg/Test/Mock/Library/GoogleTest/MockUefiBootServicesTableLib/MockUefiBootServicesTableLib.inf
+      UefiRuntimeLib|MdePkg/Test/Mock/Library/GoogleTest/MockUefiRuntimeLib/MockUefiRuntimeLib.inf
+  }
+
   MdeModulePkg/Core/Dxe/Mem/GoogleTest/MemoryBinGoogleTestHost.inf {
     <LibraryClasses>
       HobLib|MdePkg/Test/Mock/Library/GoogleTest/MockHobLib/MockHobLib.inf
